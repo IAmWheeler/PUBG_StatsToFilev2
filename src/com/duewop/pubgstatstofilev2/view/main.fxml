@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -19,6 +20,15 @@
    <children>
       <TabPane layoutX="7.0" layoutY="2.0" prefHeight="703.0" prefWidth="481.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
+            <Tab text="WorkLog">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextArea fx:id="txtWorkLog" layoutX="14.0" layoutY="14.0" prefHeight="657.0" prefWidth="453.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
           <Tab text="Settings">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="668.0" prefWidth="481.0">
@@ -80,37 +90,55 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane layoutY="8.0" prefHeight="90.0" prefWidth="481.0">
+                        <GridPane layoutY="8.0" prefHeight="310.0" prefWidth="481.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="75.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="70.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="3.0" prefWidth="29.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="83.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="153.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="103.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="81.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="59.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="3.0" prefWidth="15.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="228.0" minWidth="10.0" prefWidth="105.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="238.0" minWidth="10.0" prefWidth="119.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <CheckBox fx:id="chk_wins" mnemonicParsing="false" text="Wins" />
                               <TextField fx:id="txt_wins" promptText="Enter a File Name" text="wins.txt" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                              <CheckBox fx:id="chk_kills" layoutX="10.0" layoutY="17.0" mnemonicParsing="false" text="Kills" GridPane.rowIndex="1" />
+                              <TextField fx:id="txt_kills" promptText="Enter a File Name" text="kills.txt" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="chk_deaths" layoutX="10.0" layoutY="47.0" mnemonicParsing="false" text="Deaths" GridPane.rowIndex="2" />
+                              <TextField fx:id="txt_deaths" layoutX="105.0" layoutY="13.0" promptText="Enter a File Name" text="deaths.txt" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="chk_headshots" layoutX="10.0" layoutY="17.0" mnemonicParsing="false" text="Headshot Kills" GridPane.columnIndex="4" />
+                              <CheckBox fx:id="chk_assists" layoutX="10.0" layoutY="17.0" mnemonicParsing="false" text="Assists" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="chk_knockouts" layoutX="10.0" layoutY="17.0" mnemonicParsing="false" text="Knockouts" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                              <TextField fx:id="txt_headshots" layoutX="105.0" layoutY="13.0" prefHeight="25.0" prefWidth="136.0" promptText="Enter a File Name" text="headshots.txt" GridPane.columnIndex="5" />
+                              <TextField fx:id="txt_assists" layoutX="105.0" layoutY="13.0" promptText="Enter a File Name" text="assists.txt" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                              <TextField fx:id="txt_knockouts" layoutX="105.0" layoutY="13.0" promptText="Enter a File Name" text="knockouts.txt" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="chk_kdratio" mnemonicParsing="false" text="K/D Ratio" GridPane.rowIndex="3" />
+                              <TextField fx:id="txt_kdratio" promptText="Enter a File Name" text="kdratio.txt" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                              <CheckBox fx:id="chk_revives" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" text="Revives" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                              <TextField fx:id="txt_revives" layoutX="121.0" layoutY="16.0" promptText="Enter a File Name" text="revives.txt" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                              <CheckBox fx:id="chk_accessonly" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" text="Access 5" GridPane.rowIndex="6" />
+                              <Label fx:id="txt_accessonly" text="Write additional Win, Kill Death files with only Early Access 5 data" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="6" />
+                              <TextField fx:id="txt_longestkill" promptText="Enter a File Name" text="longestkill.txt" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                              <CheckBox fx:id="chk_longestkill" mnemonicParsing="false" text="Longest Kill" GridPane.rowIndex="4" />
+                              <CheckBox fx:id="chk_rndplayed" layoutX="10.0" layoutY="23.0" mnemonicParsing="false" text="Rounds Played" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                              <TextField fx:id="txt_rndplayed" layoutX="121.0" layoutY="19.0" promptText="Enter a File Name" text="rndplayed.txt" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                              <CheckBox fx:id="chk_rank" layoutX="10.0" layoutY="24.0" mnemonicParsing="false" text="Rank" GridPane.rowIndex="5" />
+                              <TextField fx:id="txt_rank" layoutX="112.0" layoutY="20.0" promptText="Enter a File Name" text="rank.txt" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <ChoiceBox fx:id="sel_rank_type" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="WorkLog">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TextArea fx:id="txtWorkLog" layoutX="14.0" layoutY="14.0" prefHeight="657.0" prefWidth="453.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
         </tabs>
       </TabPane>
       <ButtonBar layoutX="277.0" layoutY="703.0" prefHeight="40.0" prefWidth="200.0">
