@@ -116,8 +116,8 @@ public class PUBGStats {
 
 	public String RunProcess() throws IOException {
 
-//		String urlString = "https://pubgtracker.com/api/profile/pc/" + this.userName;
-		String urlString = "https://api.pubgtracker.com/v2/profile/pc/" + this.userName;
+//		String urlString = "https://pubgtracker.com/api/profile/pc/" + this.userName + "?season=2017-pre5";
+		String urlString = "https://api.pubgtracker.com/v2/profile/pc/" + this.userName + "?season=2017-pre5";
 		url = new URL(urlString);
 		connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod("GET");
@@ -223,7 +223,7 @@ public class PUBGStats {
 
 			jobject = json_stats.get(i).getAsJsonObject();
 
-			if ((jobject.get("region").toString().equals("\"agg\"")) && (jobject.get("season").toString().equals("\"2017-pre5\""))) {
+			if ((jobject.get("region").toString().equals("\"agg\""))) {
 
 				JsonArray json_match_array = jobject.getAsJsonArray("stats");
 
