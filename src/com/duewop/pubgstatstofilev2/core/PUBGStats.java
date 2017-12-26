@@ -15,6 +15,8 @@ import java.util.Properties;
 public class PUBGStats {
 
     //Config Values
+    static final String currentseason = "2018-01";
+    static final String lastseason = "2017-pre6";
     String apiKey = null;
     String userName = null;
     URL url;
@@ -128,7 +130,7 @@ public class PUBGStats {
         String pastSeason = null;
         Map<String, String> pastStats;
 
-        String currentSeason = GetJSONData("2018-01");
+        String currentSeason = GetJSONData(currentseason);
         Map<String, String> currentStats = ProcessData(currentSeason);
 
         //Work the variables to get totals
@@ -137,7 +139,7 @@ public class PUBGStats {
 
         //Write Current Files If Wanted
         if (var_accessonly)
-            WriteCurrentFiles(currentStats, "2018-01");
+            WriteCurrentFiles(currentStats, currentseason);
 
         //Get Season 1 Stats
         pastSeason = GetJSONData("2017-pre1");
@@ -192,7 +194,7 @@ public class PUBGStats {
         currentStats = CompileStats(currentStats, pastStats);
 
         //Write Current Files If Wanted
-        WriteCurrentFiles(currentStats, "totals");
+        WriteCurrentFiles(currentStats, lastseason);
 
 
 
@@ -461,7 +463,9 @@ public class PUBGStats {
     private void WriteCurrentFiles(Map<String, String> currentStats, String season) {
 
         checkLog = "\r\n";
-        finalLog = "\r\n";
+        if (season == currentseason) {
+            finalLog = "\r\n";
+        }
 
         //Configured to process Wins
         if (var_wins && var_txt_wins != null) {
@@ -472,15 +476,17 @@ public class PUBGStats {
                     "Current Season Duo FPP Wins: " + currentStats.get("agg_duo_fpp_win") + "\r\n" +
                     "Current Season Squad Wins: " + currentStats.get("agg_squad_win") + "\r\n" +
                     "Current Season Squad FPP Wins: " + currentStats.get("agg_squad_fpp_win") + "\r\n";
-            finalLog = finalLog + "Total Wins: " + currentStats.get("total_win") + "\r\n";
 
             //Write the chicken dinners
-            if (var_accessonly && season == "2018-01")
+            if (var_accessonly && season == currentseason) {
                 writeToFile("seasononly_" + var_txt_wins, currentStats.get("total_win"));
+                finalLog = finalLog + "Season Wins: " + currentStats.get("total_win") + "\r\n";
+            }
 
-            if (season == "totals")
+            if (season == lastseason) {
                 writeToFile(var_txt_wins, currentStats.get("total_win"));
-
+                finalLog = finalLog + "Total Wins: " + currentStats.get("total_win") + "\r\n";
+            }
         }
 
         //Configured to process Kills
@@ -492,14 +498,17 @@ public class PUBGStats {
                     "Current Season Duo FPP Kills: " + currentStats.get("agg_duo_fpp_kill") + "\r\n" +
                     "Current Season Squad Kills: " + currentStats.get("agg_squad_kill") + "\r\n" +
                     "Current Season Squad FPP Kills: " + currentStats.get("agg_squad_fpp_kill") + "\r\n";
-            finalLog = finalLog + "Total Kills: " + currentStats.get("total_kill") + "\r\n";
 
             //Write the kills
-            if (var_accessonly && season == "2018-01")
+            if (var_accessonly && season == currentseason) {
                 writeToFile("seasononly_" + var_txt_kills, currentStats.get("total_kill"));
+                finalLog = finalLog + "Season Kills: " + currentStats.get("total_kill") + "\r\n";
+            }
 
-            if (season == "totals")
+            if (season == lastseason) {
                 writeToFile(var_txt_kills, currentStats.get("total_kill"));
+                finalLog = finalLog + "Total Kills: " + currentStats.get("total_kill") + "\r\n";
+            }
         }
 
         //Configured to process Deaths
@@ -511,14 +520,17 @@ public class PUBGStats {
                     "Current Season Duo FPP Deaths: " + currentStats.get("agg_duo_fpp_death") + "\r\n" +
                     "Current Season Squad Deaths: " + currentStats.get("agg_squad_death") + "\r\n" +
                     "Current Season Squad FPP Deaths: " + currentStats.get("agg_squad_fpp_death") + "\r\n";
-            finalLog = finalLog + "Total Deaths: " + currentStats.get("total_death") + "\r\n";
 
             //Write the deaths
-            if (var_accessonly && season == "2018-01")
+            if (var_accessonly && season == currentseason) {
                 writeToFile("seasononly_" + var_txt_deaths, currentStats.get("total_death"));
+                finalLog = finalLog + "Season Deaths: " + currentStats.get("total_death") + "\r\n";
+            }
 
-            if (season == "totals")
+            if (season == lastseason) {
                 writeToFile(var_txt_deaths, currentStats.get("total_death"));
+                finalLog = finalLog + "Total Deaths: " + currentStats.get("total_death") + "\r\n";
+            }
         }
 
         //Configured to process Headshot Kills
@@ -530,14 +542,17 @@ public class PUBGStats {
                     "Current Season Duo FPP Headshot Kills: " + currentStats.get("agg_duo_fpp_headshots") + "\r\n" +
                     "Current Season Squad Headshot Kills: " + currentStats.get("agg_squad_headshots") + "\r\n" +
                     "Current Season Squad FPP Headshot Kills: " + currentStats.get("agg_squad_fpp_headshots") + "\r\n";
-            finalLog = finalLog + "Total Headshot Kills: " + currentStats.get("total_headshots") + "\r\n";
 
             //Write the headshots
-            if (var_accessonly && season == "2018-01")
+            if (var_accessonly && season == currentseason) {
                 writeToFile("seasononly_" + var_txt_headshots, currentStats.get("total_headshots"));
+                finalLog = finalLog + "Season Headshot Kills: " + currentStats.get("total_headshots") + "\r\n";
+            }
 
-            if (season == "totals")
+            if (season == lastseason) {
                 writeToFile(var_txt_headshots, currentStats.get("total_headshots"));
+                finalLog = finalLog + "Total Headshot Kills: " + currentStats.get("total_headshots") + "\r\n";
+            }
         }
 
         //Configured to process Assists
@@ -549,14 +564,17 @@ public class PUBGStats {
                     "Current Season Duo FPP Assists: " + currentStats.get("agg_duo_fpp_assists") + "\r\n" +
                     "Current Season Squad Assists: " + currentStats.get("agg_squad_assists") + "\r\n" +
                     "Current Season Squad FPP Assists: " + currentStats.get("agg_squad_fpp_assists") + "\r\n";
-            finalLog = finalLog + "Total Assists: " + currentStats.get("total_assists") + "\r\n";
 
             //Write the assists
-            if (var_accessonly && season == "2018-01")
+            if (var_accessonly && season == currentseason) {
                 writeToFile("seasononly_" + var_txt_assists, currentStats.get("total_assists"));
+                finalLog = finalLog + "Season Assists: " + currentStats.get("total_assists") + "\r\n";
+            }
 
-            if (season == "totals")
+            if (season == lastseason) {
                 writeToFile(var_txt_assists, currentStats.get("total_assists"));
+                finalLog = finalLog + "Total Assists: " + currentStats.get("total_assists") + "\r\n";
+            }
         }
 
         //Configured to process Knock Outs
@@ -568,14 +586,17 @@ public class PUBGStats {
                     "Current Season Duo FPP Knock Outs: " + currentStats.get("agg_duo_fpp_knockouts") + "\r\n" +
                     "Current Season Squad Knock Outs: " + currentStats.get("agg_squad_knockouts") + "\r\n" +
                     "Current Season Squad FPP Knock Outs: " + currentStats.get("agg_squad_fpp_knockouts") + "\r\n";
-            finalLog = finalLog + "Total Knock Outs: " + currentStats.get("total_knockouts") + "\r\n";
 
             //Write the knockouts
-            if (var_accessonly && season == "2018-01")
+            if (var_accessonly && season == currentseason) {
                 writeToFile("seasononly_" + var_txt_knockouts, currentStats.get("total_knockouts"));
+                finalLog = finalLog + "Season Knock Outs: " + currentStats.get("total_knockouts") + "\r\n";
+            }
 
-            if (season == "totals")
+            if (season == lastseason) {
                 writeToFile(var_txt_knockouts, currentStats.get("total_knockouts"));
+                finalLog = finalLog + "Total Knock Outs: " + currentStats.get("total_knockouts") + "\r\n";
+            }
         }
 
         //Configured to process K/D Ratio
@@ -587,14 +608,17 @@ public class PUBGStats {
                     "Current Season Duo FPP K/D Ratio: " + currentStats.get("agg_duo_fpp_kdratio") + "\r\n" +
                     "Current Season Squad K/D Ratio: " + currentStats.get("agg_squad_kdratio") + "\r\n" +
                     "Current Season Squad FPP K/D Ratio: " + currentStats.get("agg_squad_fpp_kdratio") + "\r\n";
-            finalLog = finalLog + "Total K/D Ratio: " + String.format("%.2f", Double.parseDouble(currentStats.get("total_kdratio"))) + "\r\n";
 
             //Write the kdratio
-            if (var_accessonly && season == "2018-01")
-            writeToFile("seasononly_" + var_txt_kdratio, String.format("%.2f", Double.parseDouble(currentStats.get("total_kdratio"))));
+            if (var_accessonly && season == currentseason) {
+                writeToFile("seasononly_" + var_txt_kdratio, String.format("%.2f", Double.parseDouble(currentStats.get("total_kdratio"))));
+                finalLog = finalLog + "Season K/D Ratio: " + String.format("%.2f", Double.parseDouble(currentStats.get("total_kdratio"))) + "\r\n";
+            }
 
-            if (season == "totals")
+            if (season == lastseason) {
                 writeToFile(var_txt_kdratio, String.format("%.2f", Double.parseDouble(currentStats.get("total_kdratio"))));
+                finalLog = finalLog + "Total K/D Ratio: " + String.format("%.2f", Double.parseDouble(currentStats.get("total_kdratio"))) + "\r\n";
+            }
         }
 
         //Configured to process Revives
@@ -606,14 +630,17 @@ public class PUBGStats {
                     "Current Season Duo FPP Revives: " + currentStats.get("agg_duo_fpp_revives") + "\r\n" +
                     "Current Season Squad Revives: " + currentStats.get("agg_squad_revives") + "\r\n" +
                     "Current Season Squad FPP Revives: " + currentStats.get("agg_squad_fpp_revives") + "\r\n";
-            finalLog = finalLog + "Total Revives: " + currentStats.get("total_revives") + "\r\n";
 
             //Write the revives
-            if (var_accessonly && season == "2018-01")
+            if (var_accessonly && season == currentseason) {
                 writeToFile("seasononly_" + var_txt_revives, currentStats.get("total_revives"));
+                finalLog = finalLog + "Season Revives: " + currentStats.get("total_revives") + "\r\n";
+            }
 
-            if (season == "totals")
+            if (season == lastseason) {
                 writeToFile(var_txt_revives, currentStats.get("total_revives"));
+                finalLog = finalLog + "Total Revives: " + currentStats.get("total_revives") + "\r\n";
+            }
         }
 
         //Configured to process Rounds Played
@@ -625,14 +652,17 @@ public class PUBGStats {
                     "Current Season Duo FPP Rounds Played: " + currentStats.get("agg_duo_fpp_rndplayed") + "\r\n" +
                     "Current Season Squad Rounds Played: " + currentStats.get("agg_squad_rndplayed") + "\r\n" +
                     "Current Season Squad FPP Rounds Played: " + currentStats.get("agg_squad_fpp_rndplayed") + "\r\n";
-            finalLog = finalLog + "Total Rounds Played: " + currentStats.get("total_rndplayed") + "\r\n";
 
             //Write the rndplayed
-            if (var_accessonly && season == "2018-01")
+            if (var_accessonly && season == currentseason) {
                 writeToFile("seasononly_" + var_txt_rndplayed, currentStats.get("total_rndplayed"));
+                finalLog = finalLog + "Season Rounds Played: " + currentStats.get("total_rndplayed") + "\r\n";
+            }
 
-            if (season == "totals")
+            if (season == lastseason) {
                 writeToFile(var_txt_rndplayed, currentStats.get("total_rndplayed"));
+                finalLog = finalLog + "Total Rounds Played: " + currentStats.get("total_rndplayed") + "\r\n";
+            }
         }
 
         //Configured to process Longest Kill
@@ -644,14 +674,17 @@ public class PUBGStats {
                     "Current Season Duo FPP Longest Kill: " + currentStats.get("agg_duo_fpp_longestkill") + "\r\n" +
                     "Current Season Squad Longest Kill: " + currentStats.get("agg_squad_longestkill") + "\r\n" +
                     "Current Season Squad FPP Longest Kill: " + currentStats.get("agg_squad_fpp_longestkill") + "\r\n";
-            finalLog = finalLog + "Longest Kill: " + currentStats.get("total_longestkill") + "\r\n";
 
             //Write the kdratio
-            if (var_accessonly && season == "2018-01")
+            if (var_accessonly && season == currentseason) {
                 writeToFile("seasononly_" + var_txt_longestkill, String.format("%.2f", Double.parseDouble(currentStats.get("total_longestkill"))));
+                finalLog = finalLog + "Season Longest Kill: " + String.format("%.2f", Double.parseDouble(currentStats.get("total_longestkill"))) + "\r\n";
+            }
 
-            if (season == "totals")
+            if (season == lastseason) {
                 writeToFile(var_txt_longestkill, String.format("%.2f", Double.parseDouble(currentStats.get("total_longestkill"))));
+                finalLog = finalLog + "Longest Kill: " + currentStats.get("total_longestkill") + "\r\n";
+            }
         }
     }
 
